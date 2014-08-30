@@ -1,0 +1,8 @@
+var modal = "#{escape_javascript render('stories/storymodal', story: @story)}";
+
+$('body').append(modal);
+
+$('#mymodal').show();
+$('#mymodal').modal();
+
+$('#mymodal').on('hidden', function(){ console.log("hidden"); $('#mymodal').remove(); });

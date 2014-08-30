@@ -1,0 +1,29 @@
+.post.animated
+  .sidebar
+    .avatar
+      %img.author{:src => "http://graph.facebook.com/#{comment.user.uid}/picture?type=square"}
+    #socialize
+      %a#left.social{:href => "#"}
+        %i.fa.fa-eye
+      %a#right.social{:href => "#"}
+        %i.fa.fa-heart
+      %a#centre.social{:href => "#"}
+        %i.fa.fa-clock-o
+  .mybox-middle
+    .widget
+      %span.username
+        = comment.user.name
+      %br
+      %span.timestamp{:style => "clear:both;"}
+        %i.fa.fa-clock-o
+          = comment.created_at
+      %br
+      %span.timestamp{:style => "clear:both;"}
+        %i.fa.fa-comments-o
+          = comment.user.projects.count
+      %br
+      %span.timestamp{:style => "clear:both;"}
+        %i.fa.fa-eye
+          22 subscribers
+    .message
+      = comment.content

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @story.title
+%p
+  %b Image url:
+  = @story.image_url
+%p
+  %b File url:
+  = @story.file_url
+%p
+  %b Description:
+  = @story.description
+%p
+  %b Project:
+  = @story.project
+
+= link_to 'Edit', edit_story_path(@story)
+\|
+= link_to 'Back', stories_path

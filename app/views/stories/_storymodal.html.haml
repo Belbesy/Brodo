@@ -1,0 +1,56 @@
+.modal.fade#mymodal
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Close
+        %h4.modal-title 
+          Story #
+          = story.id
+      .modal-body
+        .row
+          .col-lg-12
+            .media
+              %a.pull-left{:href => "#"}
+                %img.media-object.dp.img-circle{:src => "#{story.avatar.url}", :style => "width: 100px;height:100px;"}/
+              .media-body
+                %h4.media-heading
+                  = story.title
+                %h5
+                  = story.description
+                %hr{:style => "margin:8px auto"}
+                  - story.project.users.each do |user|
+                    %span.label.label-default
+                      = user.name
+                    &nbsp;
+
+        #container.row
+          #header To Do List
+          #pending.task-list.task-container
+            %h3 Pending
+          #inProgress.task-list.task-container
+            %h3 In Progress
+          #completed.task-list.task-container
+            %h3 Completed
+          .task-list
+            %h3 Add a task
+            %form#todo-form
+              %input{:placeholder => "Title", :type => "text"}/
+              %textarea{:placeholder => "Description"}
+              %input#datepicker{:placeholder => "Due Date (dd/mm/yyyy)", :type => "text"}/
+              %input.btn.btn-primary{:onclick => "todo.add(#{story.id});", :type => "button", :value => "Add Task"}
+            #delete-div
+              Drag Here to Delete
+          %div{:style => "clear:both;"}
+          :javascript
+            $( "#datepicker" ).datepicker();
+            $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
+            $(".task-container").droppable();
+            $(".todo-task").draggable({ revert: "valid", revertDuration:200 });
+            todo.init(
+            {
+            "story_id": "#{story.id}"
+            });      
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

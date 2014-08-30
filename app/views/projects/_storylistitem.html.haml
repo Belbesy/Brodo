@@ -1,0 +1,22 @@
+%li.list-group-item
+  .row
+    .col-xs-3.col-md-3
+      %img.img-responsive{:alt => "", :src => story.avatar.url(:thumb)}/
+    .col-xs-9.col-md-9
+      %div
+        %a{:href => polymorphic_path(story)}
+          = story.title
+        .mic-info
+          On
+          = story.created_at
+      .comment-text
+        = story.description
+      .action
+        = link_to polymorphic_path(story), options = {remote: true}, html_options={:class => "btn btn-primary btn-xs"} do
+          %span.fa.fa-eye
+        %a.btn.btn-primary.btn-xs{:title => "Edit", :type => "button", :href => "/stories/#{story.id}/edit" }
+          %span.glyphicon.glyphicon-pencil
+        %a.btn.btn-danger.btn-xs{:title => "Delete", :type => "button", :href => "/stories/#{story.id}", "data-method" => "delete"}
+          %span.glyphicon.glyphicon-trash
+
+         

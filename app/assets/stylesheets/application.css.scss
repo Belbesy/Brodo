@@ -12,4 +12,32 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
+ *= require jquery-ui/datepicker
  */
+ .navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 100px;
+}
+
+.equal, .equal > div[class*='col-'] {  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 0 auto;
+}

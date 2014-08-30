@@ -1,0 +1,66 @@
+%h1 Listing projects
+
+.container
+  .row
+    .col-xs-12.col-sm-offset-2.col-sm-8{:class => "[ ]"}
+      %ul.event-list
+        - @projects.each do |project|
+          %li
+            %time{:datetime => project.created_at}
+              %span.day
+                = project.created_at.strftime("%d")
+              %span.month
+                = project.created_at.strftime("%b")
+              %span.year
+                = project.created_at.strftime("%Y")
+              %span.time 8:00 PM
+            %img{:alt => "My 24th Birthday!", :src => project.image_url}/
+            .info
+              %h2.title
+                = project.title
+              %p.desc
+                = project.description
+                
+                %hr
+                - if project.users.empty? == false
+                  &nbsp;&nbsp;&nbsp;&nbsp;Members&nbsp;:&nbsp;
+
+                - project.users.each do |user|
+                  %span{:class =>"label label-success"}
+                    = user.name
+                  &nbsp; &nbsp; 
+                %br
+                %br
+                - if project.stories.empty? == false
+                  &nbsp;&nbsp;&nbsp;&nbsp;Stories&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                - project.stories.each do |story|
+                  %span{:class =>"label label-primary"}
+                    = story.title
+                
+              %ul
+                %li{:style => "width:33%;"}
+                  %a{:href => "/stories/new"}
+                    %span.fa.fa-th-list
+                    Add Story
+
+                %li{:style => "width:33%;"}
+                  %a{:href => "/stories/new"}  
+                    %span.fa.fa-male
+                    Add Members
+                %li{:style => "width:33%;"}
+
+                    
+
+            .social
+              %ul
+                %li{:style => "width:33%;"}
+                  %a{:href=> "/projects/#{project.id}"}               
+                    %span.fa.fa-eye
+                %li{:style => "width:33%;"}
+                  %a{:href => "/projects/#{project.id}/edit"}
+                    %span.fa.fa-edit
+                %li.google-plus{:style => "width:33%;"}
+                  %a{:href => "/projects/#{project.id}", "data-method" => "delete" }
+                    %span.fa.fa-trash-o
+
+= link_to 'New Project', new_project_path

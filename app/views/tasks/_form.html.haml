@@ -1,0 +1,12 @@
+= simple_form_for(@task) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.input :due
+    = f.input :state
+    = f.association :story
+
+  .form-actions
+    = f.button :submit

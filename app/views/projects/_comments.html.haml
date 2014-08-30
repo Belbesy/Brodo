@@ -1,0 +1,17 @@
+.container
+  %div.row{ :id => "comments"}
+    - @project.comments.each do |comment|
+      = render 'commentitem', :comment => comment
+    .entry{:id => "new_comment"}
+      .sidebar
+        .avatar
+          %img.author{:src => "http://graph.facebook.com/#{current_user.uid}/picture?type=square"}/
+      .mybox
+        = form_tag project_comments_path(@project.id), :remote => true do
+          .textarea-wrapper
+            %textarea{name: 'comment[content]'}
+            = hidden_field :comment, :commentable_id, :value => @project.id
+            = hidden_field :comment, :commentable_type, :value => "Project"
+            .actions
+              %div{:style => "float:right"}
+                %input{:type => :submit, :class => :send}

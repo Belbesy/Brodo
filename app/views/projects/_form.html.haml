@@ -1,0 +1,12 @@
+= simple_form_for(@project) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.label "Image"
+    = f.file_field :avatar
+    = f.association :users
+
+  .form-actions
+    = f.button :submit

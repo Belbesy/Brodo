@@ -11,7 +11,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814100446) do
+ActiveRecord::Schema.define(version: 20140825093900) do
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "projects", force: true do |t|
+    t.string   "title"
+    t.string   "image_url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  create_table "projects_users", force: true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  create_table "stories", force: true do |t|
+    t.string   "title"
+    t.string   "image_url"
+    t.string   "file_url"
+    t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "state_cd"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  add_index "stories", ["project_id"], name: "index_stories_on_project_id"
+
+  create_table "tasks", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "due"
+    t.integer  "state"
+    t.integer  "story_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["story_id"], name: "index_tasks_on_story_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -20,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140814100446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role"
+    t.string   "email"
   end
 
 end

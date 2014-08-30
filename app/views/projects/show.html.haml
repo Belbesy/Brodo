@@ -1,0 +1,81 @@
+%container
+  .row.user-menu-container.square
+    .col-md-12.user-details
+      .row.coralbg.white
+        .col-md-9.no-pad
+          .user-pad
+            %h3
+              #{@project.title}
+            %h4.white
+              %i.fa.fa-check-circle-o
+              #{@project.description}
+            %a.btn.btn-labeled.btn-info{:href => edit_project_path(@project), :type => "button"}
+              %span.btn-label>
+                %i.fa.fa-pencil
+              Edit
+            %a.btn.btn-labeled.btn-info{:href => new_story_path(:project_id => @project.id), :type => "button"}
+              %span.btn-label>
+                %i.fa.fa-pencil
+              New Story
+        .col-md-3.no-pad
+          .user-image
+            %img.img-responsive.thumbnail{:src => @project.avatar.url }/
+      .row.overview
+        .col-md-4.user-pad.text-center
+          %h3 Stories
+          %h4
+            = @project.stories.count
+        .col-md-4.user-pad.text-center
+          %h3 Tasks
+          %h4 15
+        .col-md-4.user-pad.text-center
+          %h3 Members
+          %h4
+            = @project.users.count
+  .container.container-xs-height
+    .row.row-xs-height
+      .col-xs-4.col-xs-height
+        .row
+          .panel.panel-default.widget
+            .panel-heading
+              %span.glyphicon.glyphicon-edit
+              %h3.panel-title
+                Todo
+            .panel-body
+              %ul.list-group
+                - @project.stories.each do |story|
+                  - if story.todo?
+                    =render 'storylistitem', :story => story
+      .col-xs-4.col-xs-height
+        .row
+          .panel.panel-default.widget
+            .panel-heading
+              %span.glyphicon.glyphicon-share
+              %h3.panel-title
+                Doing
+            .panel-body
+              %ul.list-group
+                - @project.stories.each do |story|
+                  - if story.doing?
+                    =render 'storylistitem', :story => story
+      .col-xs-4.col-xs-height
+        .row
+          .panel.panel-default.widget
+            .panel-heading
+              %span.glyphicon.glyphicon-check
+              %h3.panel-title
+                Done
+            .panel-body
+              %ul.list-group
+                - @project.stories.each do |story|
+                  - if story.state_cd == 2
+                    =render 'storylistitem', :story => story
+  .container
+    .row
+      = render 'comments'
+   
+
+
+
+= link_to 'Back', projects_path
+    

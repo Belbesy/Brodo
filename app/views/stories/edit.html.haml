@@ -1,0 +1,16 @@
+%h1 Editing story
+
+= simple_form_for(@story) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.label "State"
+    .br
+    = f.select :state, enum_option_pairs(Story, :state)
+
+  .form-actions
+    = f.button :submit
+
+= link_to 'Back', stories_path

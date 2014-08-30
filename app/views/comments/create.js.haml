@@ -1,0 +1,10 @@
+var $entry = $('body').find('.entry');
+var $first = $('body').find('.post').first();
+var $last = $('body').find('.post').last();
+var $cosa = $("#{escape_javascript render('projects/commentitem', comment: @comment)}");
+$cosa.find('.avatar').hide();
+$cosa.css('min-height', '0px').css('height', '0px');
+$cosa.insertBefore("#new_comment").animate({ height: (110 + Math.random() * 40)}, 450);
+$cosa.insertBefore("#new_comment");
+$cosa.find('.avatar').show();
+$cosa.find('.avatar').addClass('animated bounceInLeft');

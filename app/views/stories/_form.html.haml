@@ -1,0 +1,12 @@
+= simple_form_for(@story) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.label "Image"
+    = f.file_field :avatar
+    = hidden_field :story, :state, :value => :todo
+    = hidden_field :story, :project_id, :value => @project_id
+  .form-actions
+    = f.button :submit
